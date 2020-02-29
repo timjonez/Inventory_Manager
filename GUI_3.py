@@ -1,8 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
-import pandas as pd
 from dictionary import *
-from extracter import *
 from openpyxl import *
 
 window = Tk()
@@ -13,7 +11,10 @@ product_num = []
 
 def find_file():
     global workbook
+    global wb
+    global file_name
     file = filedialog.askopenfilename(filetypes =[("Excel files", ".xlsx .xls .xlsm")])
+    file_name = file.split('/')[-1]
     wb = load_workbook(file,data_only=True)
     workbook = wb.active
     print('file done')
@@ -23,37 +24,35 @@ def run_program():
     if len(scan1.get()) != 0:
         find_pn()
         print('Start Check')
-        pn_check(df)
+        pn_check(workbook)
         print('Finished')
-        wb.save(file)
+        print(file_name)
+        wb.save(filename='New_'+ file_name)
+        print('Saved')
 
 def find_pn():
     global product_num
+    print(scan1.get())
     for item in rti_remodel_product.items():
         if item[0] == scan1.get():
             product_num = item[1]
             print('found')
+            print(product_num)
             return product_num
 
 def pn_check(workbook):
-    for value in workbook.values:
-        if value[0] == 'RWS':
-            continue
-        if value[6] == product_num:
-            print(value[6])
-            x = value[3:5]
-            print(x[0])
-            if x[0] is None and x[1] is None:
-                location = value[0]
-                sheet[location][3].value = scan2.get()
-                sheet[location][4].value = scan3.get()
-                print(sheet[location][4].value)
-                print('Check_finished')
-                break
-
-
-            else:
-                continue
+    for row in workbook.iter_rows():
+        for cell in row:
+            if cell.value == product_num:
+                print(str(cell.row))
+                if workbook[cell.row][3].value is None and workbook[cell.row][4].value is None:
+                    workbook[cell.row][3].value = scan2.get()
+                    workbook[cell.row][4].value = scan3.get()
+                    print(workbook[cell.row][3].value)
+                    print('Check finished ')
+                    break
+                else:
+                    continue
 
 #Add file button
 btn = Button(window,text='Add File', command = find_file)
