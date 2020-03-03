@@ -15,7 +15,7 @@ def find_file():
     global file_name
     file = filedialog.askopenfilename(filetypes =[("Excel files", ".xlsx .xls .xlsm")])
     file_name = file.split('/')[-1]
-    wb = load_workbook(file,data_only=True)
+    wb = load_workbook(file,data_only=True,keep_vba=True)
     workbook = wb.active
     print('file done')
     return workbook
@@ -52,11 +52,38 @@ def pn_check(workbook):
                     print('Check finished ')
                     break
                 else:
+                    print('No More Nones')
                     continue
 
-#Add file button
-btn = Button(window,text='Add File', command = find_file)
-btn.grid(column=5,row=1)
+user_select = IntVar()
+user_select.set(2)
+def selection():
+    if user_select.get() ==1:
+        print('New Store')
+    elif user_select.get() ==2:
+        print('Remodel')
+        run_program()
+    else:
+        print('Failed at selection')
+
+
+
+
+#Add selection for Remodel
+Rbtn = Radiobutton(window,text='New Store',indicatoron=0 , variable=user_select, value=1,width=10)
+Rbtn.grid(column=4,row=0)
+
+#Add selection for New
+Rbtn = Radiobutton(window,text='Remodel',indicatoron=0, variable=user_select, value=2,width=10)
+Rbtn.grid(column=6,row=0)
+
+# Add file button
+btn = Button(window, text='Add File', command=find_file)
+btn.grid(column=5, row=1)
+
+still_adding = BooleanVar()
+still_adding.set(True)
+
 
 #Text to indicate file browsing
 lbl1 = Label(window,text='Product Number')
@@ -67,8 +94,8 @@ scan1 = Entry(window, width=15)
 scan1.grid(column=5,row=2)
 
 #product number submit button
-btn1 = Button(window,text='Add',command =run_program)
-btn1.grid(column=5,row=5)
+btn1 = Button(window,text='Add',command =selection,padx=40)
+btn1.grid(column=5,row=5,pady=5)
 
 #Entry field for asset tags
 scan2 = Entry(window, width=15)
@@ -83,6 +110,18 @@ scan3.grid(column=5,row=4)
 #Text to indicate Serial Number Field
 lbl3 = Label(window,text='Serial Number')
 lbl3.grid(column=4,row=4)
+
+space = Label(window,text='                 ')
+space.grid(column=5,row=6)
+
+
+#Button to continue adding
+cont_btn = Button(window,text='Add Another')
+cont_btn.grid(column=5,row=7)
+
+#Button to quit adding and finish
+fin_btn = Button(window,text='Finish',command=still_adding.set(False))
+fin_btn.grid(column=6,row=7)
 
 
 
