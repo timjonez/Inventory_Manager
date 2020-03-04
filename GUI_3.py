@@ -1,10 +1,10 @@
-from tkinter import *
 from tkinter import filedialog
+from tkinter import *
 from dictionary import *
 from openpyxl import *
 
 window = Tk()
-window.title('RTI WAWA Inventory')
+window.title('WAWA Scanner')
 window.geometry('300x200')
 
 product_num = []
@@ -22,8 +22,8 @@ def find_file():
         print('Try Again')
     else:
         # Show file selected
-        show_file = Label(window, text=file_name)
-        show_file.grid(column=4,row=2)
+        show_file = Label(window, text=file_name[0:15]+'...')
+        show_file.grid(column=5,row=2)
     return workbook
 
 def run_program():
