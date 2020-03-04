@@ -18,6 +18,12 @@ def find_file():
     wb = load_workbook(file,data_only=True,keep_vba=True)
     workbook = wb.active
     print('file done')
+    if file_name == '':
+        print('Try Again')
+    else:
+        # Show file selected
+        show_file = Label(window, text=file_name)
+        show_file.grid(column=4,row=2)
     return workbook
 
 def run_program():
@@ -64,11 +70,16 @@ def selection():
         print('Failed at selection')
 
 
-def continue_selection():
+def continue_selection_same():
     scan2.delete(first=0,last=22)
     scan3.delete(first=0,last=22)
     print('cleared')
 
+def continue_selection_diff():
+    scan1.delete(first=0,last=22)
+    scan2.delete(first=0,last=22)
+    scan3.delete(first=0,last=22)
+    print('cleared')
 
 def finish_program():
     print(file_name)
@@ -95,41 +106,44 @@ still_adding.set(True)
 
 #Text to indicate file browsing
 lbl1 = Label(window,text='Product Number')
-lbl1.grid(column=4,row=2)
+lbl1.grid(column=4,row=3)
 
 #Entry field for product number
 scan1 = Entry(window, width=15)
-scan1.grid(column=5,row=2)
-
-#product number submit button
-btn1 = Button(window,text='Add',command =selection,padx=40)
-btn1.grid(column=5,row=5,pady=5)
+scan1.grid(column=5,row=3)
 
 #Entry field for asset tags
 scan2 = Entry(window, width=15)
-scan2.grid(column=5,row=3)
+scan2.grid(column=5,row=4)
 #Text to indicate asset tag field
 lbl2 = Label(window,text='Asset Tag')
-lbl2.grid(column=4,row=3)
+lbl2.grid(column=4,row=4)
 
 #Entry field for serial number
 scan3 = Entry(window, width=15)
-scan3.grid(column=5,row=4)
+scan3.grid(column=5,row=5)
 #Text to indicate Serial Number Field
 lbl3 = Label(window,text='Serial Number')
-lbl3.grid(column=4,row=4)
+lbl3.grid(column=4,row=5)
+
+#product number submit button
+btn1 = Button(window,text='Add',command =selection,padx=40)
+btn1.grid(column=5,row=6,pady=5)
 
 space = Label(window,text='                 ')
-space.grid(column=5,row=6)
+space.grid(column=5,row=7)
 
+#Button to continue adding additional of the same
+cont_btn_same = Button(window,text='Add Additional',command= continue_selection_same)
+cont_btn_same.grid(column=4,row=8)
 
-#Button to continue adding
-cont_btn = Button(window,text='Add Another',command= continue_selection)
-cont_btn.grid(column=5,row=7)
+#Button to continue adding of other products
+cont_btn_diff = Button(window,text='Add Other',command= continue_selection_diff)
+cont_btn_diff.grid(column=5,row=8)
 
 #Button to quit adding and finish
 fin_btn = Button(window,text='Finish',command=finish_program)
-fin_btn.grid(column=6,row=7)
+fin_btn.grid(column=6,row=8)
 
 
 
