@@ -26,9 +26,6 @@ def run_program():
         print('Start Check')
         pn_check(workbook)
         print('Finished')
-        print(file_name)
-        wb.save(filename='New_'+ file_name)
-        print('Saved')
 
 def find_pn():
     global product_num
@@ -67,6 +64,17 @@ def selection():
         print('Failed at selection')
 
 
+def continue_selection():
+    scan2.delete(first=0,last=22)
+    scan3.delete(first=0,last=22)
+    print('cleared')
+
+
+def finish_program():
+    print(file_name)
+    wb.save(filename='New_' + file_name)
+    print('Saved')
+    window.destroy()
 
 
 #Add selection for Remodel
@@ -116,11 +124,11 @@ space.grid(column=5,row=6)
 
 
 #Button to continue adding
-cont_btn = Button(window,text='Add Another')
+cont_btn = Button(window,text='Add Another',command= continue_selection)
 cont_btn.grid(column=5,row=7)
 
 #Button to quit adding and finish
-fin_btn = Button(window,text='Finish',command=still_adding.set(False))
+fin_btn = Button(window,text='Finish',command=finish_program)
 fin_btn.grid(column=6,row=7)
 
 
