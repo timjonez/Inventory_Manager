@@ -1,11 +1,11 @@
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 from tkinter import *
 from dictionary import *
 from openpyxl import *
 
 window = Tk()
 window.title('WAWA Scanner')
-window.geometry('300x200')
+window.geometry('300x250')
 
 product_num = []
 
@@ -26,15 +26,25 @@ def find_file():
         show_file.grid(column=5,row=2)
     return workbook
 
-def run_program():
+def run_program_remodel():
     if len(scan1.get()) != 0:
-        find_pn()
+        find_pn_remodel()
         print('Start Check')
         pn_check(workbook)
         print('Finished')
 
-def find_pn():
+def run_program_new():
     global product_num
+    if len(scan1.get()) != 0:
+        for item in rti_new_product.items():
+            if item[0] == scan1.get():
+                product_num = item[1]
+                print(product_num)
+                pn_check(workbook)
+
+
+
+def find_pn_remodel():
     print(scan1.get())
     for item in rti_remodel_product.items():
         if item[0] == scan1.get():
@@ -48,9 +58,11 @@ def pn_check(workbook):
         for cell in row:
             if cell.value == product_num:
                 print(str(cell.row))
+########                none_count = 0
                 if workbook[cell.row][3].value is None and workbook[cell.row][4].value is None:
                     workbook[cell.row][3].value = scan2.get()
                     workbook[cell.row][4].value = scan3.get()
+                    message = messagebox.showinfo("Item Added", "Item added as: "+ str(workbook[cell.row][0].value))
                     print(workbook[cell.row][3].value)
                     print('Check finished ')
                     break
@@ -63,9 +75,10 @@ user_select.set(2)
 def selection():
     if user_select.get() ==1:
         print('New Store')
+        run_program_new()
     elif user_select.get() ==2:
         print('Remodel')
-        run_program()
+        run_program_remodel()
     else:
         print('Failed at selection')
 
