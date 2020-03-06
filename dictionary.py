@@ -15,6 +15,7 @@ rti_remodel_product = {'E179069':'1717L-WA',
 #dictoinary for new stores
 rti_new_product = {'E179069':'1717L-WA',
                        '31P10TCS0B300':'10MQS19D00-WA',
+                        'time':'10MQS19C00-WA',
                        'E829550':'1517L-WA',
                        '1P4810E6A':'IBM-4810-E60-WA',
                        'C31CA85084':'C31C636084-WA',
@@ -41,5 +42,6 @@ rti_new_product = {'E179069':'1717L-WA',
                    '1PBK500':'APC-500-WA',
                    'P40G0100':'40G0100-WA',
                    '1PMC92N0-GA0SYEQA6WR':'MC9200-WA',
-                   'TC52':'TC520K1PEZU4PNA-WA'
-                                        }
+                   'TC52':'TC520K1PEZU4PNA-WA',
+                   '1646MC7':'164600018801-WA'
+                                     }
