@@ -1,4 +1,4 @@
-from tkinter import filedialog, messagebox
+from tkinter import filedialog, messagebox, Listbox
 import tkinter as tk
 from dictionary import *
 from openpyxl import *
@@ -25,6 +25,7 @@ def find_file():
         # Show file selected
         show_file = tk.Label(window, text=file_name[0:30]+'...')
         show_file.grid(column=4,row=2,columnspan=3,sticky= tk.W+tk.E)
+    scan1.focus_set()
     return workbook
 
 def run_program_remodel():
@@ -96,12 +97,14 @@ def continue_selection_same():
     scan2.delete(first=0,last=100)
     scan3.delete(first=0,last=100)
     print('cleared')
+    scan2.focus_set()
 
 def continue_selection_diff():
     scan1.delete(first=0,last=100)
     scan2.delete(first=0,last=100)
     scan3.delete(first=0,last=100)
     print('cleared')
+    scan1.focus_set()
 
 def finish_program():
     print(file_name)
@@ -134,9 +137,18 @@ btn.grid(column=5, row=1)
 lbl1 = tk.Label(window,text='Product Number')
 lbl1.grid(column=4,row=3)
 
+
 #Entry field for product number
 scan1 = tk.Entry(window, width=15)
 scan1.grid(column=5,row=3)
+
+var2 = tk.StringVar()
+var2.set(('E7D','1NR-Printer','Palo Alto','vEdge','E86',
+          'Switch','Snap Server','TimeClock'))
+options = Listbox(window,listvariable=var2)
+options.grid(column=6,row=3)
+
+
 
 #Entry field for asset tags
 scan2 = tk.Entry(window, width=15)
@@ -172,7 +184,7 @@ fin_btn = tk.Button(window,text='Finish',command=finish_program)
 fin_btn.grid(column=6,row=8)
 
 
-atexit.register(exit_prompt)
+#atexit.register(exit_prompt)
 
 
 window.mainloop()
