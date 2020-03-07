@@ -77,9 +77,11 @@ def pn_check(workbook):
                 if cell.value == product_num:
                     print(str(cell.row))
                     if workbook[cell.row][3].value is None and workbook[cell.row][4].value is None:
+                        ok = tk.messagebox.askokcancel("Item Added", "Add Item as: "+ str(workbook[cell.row][0].value))
+                        if not ok:
+                            continue
                         workbook[cell.row][3].value = scan2.get()
                         workbook[cell.row][4].value = scan3.get()
-                        tk.messagebox.showinfo("Item Added", "Item added as: "+ str(workbook[cell.row][0].value))
                         print(workbook[cell.row][3].value)
                         print('Check finished ')
                         break

@@ -49,4 +49,4 @@ rti_new_product = {'E179069':'1717L-WA',
 choices = ['----','E7D','1NR-Printer','Palo-Alto','vEdge','E86',
           'Switch','Snap-Server','TimeClock','C1111']
 
-exclude = [209,206]
+exclude = [209,206,15,16,17,18,19]
