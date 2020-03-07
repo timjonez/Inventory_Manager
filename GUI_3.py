@@ -3,11 +3,14 @@ import tkinter as tk
 from dictionary import *
 from openpyxl import *
 import atexit
+import getpass
 
 window = tk.Tk()
 window.title('WAWA Scanner')
 window.geometry('300x250')
 
+picked = tk.StringVar()
+picked.set('----')
 product_num = []
 
 def find_file():
@@ -25,6 +28,10 @@ def find_file():
         # Show file selected
         show_file = tk.Label(window, text=file_name[0:30]+'...')
         show_file.grid(column=4,row=2,columnspan=3,sticky= tk.W+tk.E)
+        if user_select.get() == 1:
+            options = tk.OptionMenu(window, picked, *choices)
+            options.grid(column=6, row=3)
+
     scan1.focus_set()
     return workbook
 
@@ -63,6 +70,9 @@ def pn_check(workbook):
 
     else:
         for row in workbook.iter_rows():
+            if row[0].value in exclude:
+                print('206/9 Exclude')
+                continue
             for cell in row:
                 if cell.value == product_num:
                     print(str(cell.row))
@@ -81,10 +91,12 @@ def pn_check(workbook):
             tk.messagebox.showinfo("Can't Add", "I can't find a empty slot for this item. ")
 
 user_select = tk.IntVar()
-user_select.set(2)
+user_select.set(0)
 def selection():
     if user_select.get() ==1:
         print('New Store')
+        if scan1.get() == '':
+            pn_lookup()
         run_program_new()
     elif user_select.get() ==2:
         print('Remodel')
@@ -92,6 +104,11 @@ def selection():
     else:
         print('Failed at selection')
 
+def pn_lookup():
+    for item in choices:
+        if item == picked.get():
+            scan1.insert(0,item)
+            print('PN_Found')
 
 def continue_selection_same():
     scan2.delete(first=0,last=100)
@@ -108,7 +125,7 @@ def continue_selection_diff():
 
 def finish_program():
     print(file_name)
-    wb.save(filename='New_' + file_name)
+    wb.save(filename='/home/'+getpass.getuser()+'/Desktop/Filled_' + file_name)
     print('Saved')
     window.destroy()
 
@@ -141,14 +158,6 @@ lbl1.grid(column=4,row=3)
 #Entry field for product number
 scan1 = tk.Entry(window, width=15)
 scan1.grid(column=5,row=3)
-
-var2 = tk.StringVar()
-var2.set(('E7D','1NR-Printer','Palo Alto','vEdge','E86',
-          'Switch','Snap Server','TimeClock'))
-options = Listbox(window,listvariable=var2)
-options.grid(column=6,row=3)
-
-
 
 #Entry field for asset tags
 scan2 = tk.Entry(window, width=15)
