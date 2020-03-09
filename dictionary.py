@@ -9,7 +9,9 @@ rti_remodel_product = {'E179069':'1717L-WA',
                        'E1715S':'E170S-E177FP-WA',
                        '1642MC3':'KC2500-WA',
                        '1635MC19':'P822F001-WA',
-                       'P2417H':'DELL-24MON-WA'
+                       'P2417H':'DELL-24MON-WA',
+                       '1635-0001-9090':'P822F001-WA',
+                       '1642-0000-8801':'KC2500-WA'
 }
 
 #dictoinary for new stores
