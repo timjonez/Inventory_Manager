@@ -17,8 +17,11 @@ def find_file():
     global workbook
     global wb
     global file_name
+    global file_path
     file = filedialog.askopenfilename(filetypes =[("Excel files", ".xlsx .xls .xlsm")])
     file_name = file.split('/')[-1]
+    file_path = file[0:-len(file_name)]
+    print(file_path)
     wb = load_workbook(file,data_only=True,keep_vba=True)
     workbook = wb.active
     print('file done')
@@ -127,7 +130,7 @@ def continue_selection_diff():
 
 def finish_program():
     print(file_name)
-    wb.save(filename='/home/'+getpass.getuser()+'/Desktop/Filled_' + file_name)
+    wb.save(filename= file_path+'Filled_' + file_name)
     print('Saved')
     window.destroy()
 

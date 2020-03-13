@@ -45,10 +45,13 @@ rti_new_product = {'E179069':'1717L-WA',
                    'P40G0100':'40G0100-WA',
                    '1PMC92N0-GA0SYEQA6WR':'MC9200-WA',
                    'TC52':'TC520K1PEZU4PNA-WA',
-                   '1646MC7':'164600018801-WA'
+                   '1646MC7':'164600018801-WA',
+                   '1635-0001-9090': 'P822F001-WA',
+                   '1642-0000-8801': 'KC2500-WA',
+                   'Safe':'ELNBY-SAFE-WA'
                                      }
 
 choices = ['----','E7D','1NR-Printer','Palo-Alto','vEdge','E86',
-          'Switch','Snap-Server','TimeClock','C1111']
+          'Switch','Snap-Server','TimeClock','C1111','Safe','TC52']
 
-exclude = [209,206,15,16,17,18,19]
+exclude = [209,206]
