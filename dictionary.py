@@ -48,10 +48,11 @@ rti_new_product = {'E179069':'1717L-WA',
                    '1646MC7':'164600018801-WA',
                    '1635-0001-9090': 'P822F001-WA',
                    '1642-0000-8801': 'KC2500-WA',
-                   'Safe':'ELNBY-SAFE-WA'
+                   'Safe':'ELNBY-SAFE-WA',
+                   'C85':'IBM 4900-C85 complete system'
                                      }
 
-choices = ['----','E7D','1NR-Printer','Palo-Alto','vEdge','E86',
+choices = ['----','E7D','1NR-Printer','Palo-Alto','vEdge','E86','C85',
           'Switch','Snap-Server','TimeClock','C1111','Safe','TC52']
 
 exclude = [209,206]

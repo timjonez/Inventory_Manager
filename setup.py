@@ -14,7 +14,7 @@ options = {
 setup(
     name = "<RTI WAWA ASSET TAGGER>",
     options = options,
-    version = "<.11>",
+    version = "<.12>",
     description = '<any description>',
     executables = executables
 )

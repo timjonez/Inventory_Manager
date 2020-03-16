@@ -3,7 +3,6 @@ import tkinter as tk
 from dictionary import *
 from openpyxl import *
 import atexit
-import getpass
 
 window = tk.Tk()
 window.title('WAWA Scanner')
