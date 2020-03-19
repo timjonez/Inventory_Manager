@@ -152,12 +152,9 @@ Rbtn.grid(column=6,row=0)
 btn = tk.Button(window, text='Add File', command=find_file)
 btn.grid(column=5, row=1)
 
-
-
 #Text to indicate file browsing
 lbl1 = tk.Label(window,text='Product Number')
 lbl1.grid(column=4,row=3)
-
 
 #Entry field for product number
 scan1 = tk.Entry(window, width=15)
