@@ -34,6 +34,7 @@ def find_file():
             options = tk.OptionMenu(window, picked, *choices)
             options.grid(column=6, row=3)
 
+
     scan1.focus_set()
     return workbook
 
